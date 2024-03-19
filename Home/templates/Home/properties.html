@@ -1,0 +1,16 @@
+{%extends "Home/base.html"%}
+{%block heroPage%}
+
+    {% for item in all  %}
+
+{{ item.image}}</br>
+{{ item.location }}</br>
+{{ item.bedrooms}}</br>
+{{ item.house_type}}</br>
+{{ item.house_price }}<br> 
+
+{% endfor %} 
+
+
+
+{%endblock heroPage%}

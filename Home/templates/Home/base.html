@@ -61,8 +61,14 @@
               </div>
             </div>
           </nav>
+          {% for rent in vacant%}
+          <li>{{ rent.location }}</li>
+          <li>{{ rent.image}}</li>
+          <li>{{ rent.bedrooms}}</li>
+              {% endfor %}
           
         {% block heroPage%}{%endblock %}
+    
        
         
         <script src="" async defer>
