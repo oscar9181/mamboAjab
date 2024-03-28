@@ -1,17 +1,21 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.http import HttpResponseRedirect
 from .models import Rentals
 from .forms import RentalsForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='login')
 def home(request):
-   
+    
+
     return render(request, 'Home/home.html',{})
 
 def base(request):
     
     return render(request, 'Home/base.html',{})
 
+@login_required(login_url='login')
 def properties(request):
     vacant = Rentals.objects.all()
     return render(request,'Home/properties.html',{"all":vacant})
@@ -30,10 +34,11 @@ def add_property(request):
 
 def add_property(request):
     if request.method == 'POST':
+
         form = RentalsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('Home/add-property?submitted=True')
+            return redirect('Home/property?submitted=True')
     else:
         form = RentalsForm()
 
@@ -41,8 +46,19 @@ def add_property(request):
 
 def search(request):
     if request.method == 'GET':
-        search=request.GET.get('search')
+        search = request.GET.get('search')
+        print(search)
         if search:
-          hoods=home.objects.filter(name__icontains=search)
-        return render(request, 'Home/search.html',{'hoods':hoods})
+         rentals = Rentals.objects.filter( location__icontains=search )
+    return render(request, 'Home/search.html',{'rentals': rentals})
+
+# propert details page
+def property_detail_view(request, property_id):
+    # Retrieve the property object based on the property_id
+    property_obj = get_object_or_404(Rentals, id=property_id)
+    print('loggged ins', request.user)
+
+    
+    # Pass the property object to the template
+    return render(request, 'Home/property_details.html', {'property': property_obj})
         

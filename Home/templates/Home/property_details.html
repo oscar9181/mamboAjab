@@ -1,0 +1,29 @@
+{% extends "Home/base.html" %}
+
+{% block heroPage %}
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row">
+      <div class="md:w-2/3 mb-8 md:mb-0 mx-auto">
+        <div class="overflow-hidden rounded-lg shadow-lg">
+          <img class="w-full h-64 object-cover" src="{{ property.image.url }}" alt="{{ property.location }}">
+        </div>
+        <div class="mt-4">
+          <h2 class="text-xl font-semibold mb-2 text-blue-600">{{ property.bedrooms }} in {{ property.location }}</h2>
+          <p class="text-gray-700 dark:text-gray-400 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut eros nec arcu fringilla cursus. Quisque faucibus enim nec metus volutpat, sit amet varius velit sagittis. Nullam aliquet est magna, ut fermentum leo consectetur vel.</p>
+          <div class="p-6 bg-white rounded-lg shadow-lg">
+            <h3 class="text-2xl font-semibold mb-2 text-blue-600">Property Details</h3>
+            <p class="text-gray-700 dark:text-gray-400"><span class="font-semibold">Bedrooms:</span> {{ property.bedrooms }}</p>
+            <p class="text-gray-700 dark:text-gray-400"><span class="font-semibold">House Type:</span> {{ property.house_type }}</p>
+            <p class="text-gray-700 dark:text-gray-400"><span class="font-semibold">Price:</span> {{ property.house_price }}</p>
+          </div>
+          <div class="mt-4 p-6 bg-white rounded-lg shadow-lg">
+            <h3 class="text-2xl font-semibold mb-2 text-blue-600">Contact Information</h3>
+            <p class="text-gray-700 dark:text-gray-400"><span class="font-semibold">Name:</span> John Doe</p>
+            <p class="text-gray-700 dark:text-gray-400"><span class="font-semibold">Email:</span> john@example.com</p>
+            <p class="text-gray-700 dark:text-gray-400"><span class="font-semibold">Phone:</span> +1234567890</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock  %}
