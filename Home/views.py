@@ -21,28 +21,25 @@ def properties(request):
     return render(request,'Home/properties.html',{"all":vacant})
  
 def add_property(request):
-
+    form = RentalsForm
     if request.method =='POST':
-      form = RentalsForm(request.POST)
+      form = RentalsForm(request.POST, request.FILES)
+      print(form.data)
+      print('for is valid', form.is_valid)
       if form.is_valid():
         form.save()
-        # return HttpResponseRedirect("Home/add-property? submitted=True")
-    else:
-        form = RentalsForm     
-    return render(request, 'Home/add-property.html',{"form":form})
+        return redirect("properties")
+      else:
+         print('not saved')
+         return redirect('home')    
 
 
-def add_property(request):
-    if request.method == 'POST':
-
-        form = RentalsForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('Home/property?submitted=True')
-    else:
-        form = RentalsForm()
-
+    # else:
+    #     form = RentalsForm
     return render(request, 'Home/add-property.html', {'form': form})
+
+
+
 
 def search(request):
     if request.method == 'GET':
